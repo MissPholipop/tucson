@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.ImageTableMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.ImageTable" >
+    <id column="img_id" property="imgId" jdbcType="INTEGER" />
+    <result column="ins_id" property="insId" jdbcType="INTEGER" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    img_id, ins_id, img_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from image_table
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from image_table
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.ImageTable" >
+    insert into image_table (img_id, ins_id, img_url
+      )
+    values (#{imgId,jdbcType=INTEGER}, #{insId,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.ImageTable" >
+    insert into image_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imgId != null" >
+        img_id,
+      </if>
+      <if test="insId != null" >
+        ins_id,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imgId != null" >
+        #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="insId != null" >
+        #{insId,jdbcType=INTEGER},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.ImageTable" >
+    update image_table
+    <set >
+      <if test="insId != null" >
+        ins_id = #{insId,jdbcType=INTEGER},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.ImageTable" >
+    update image_table
+    set ins_id = #{insId,jdbcType=INTEGER},
+      img_url = #{imgUrl,jdbcType=VARCHAR}
+    where img_id = #{imgId,jdbcType=INTEGER}
+  </update>
+</mapper>

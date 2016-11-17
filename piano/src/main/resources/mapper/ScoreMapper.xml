@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.Score" >
+    <id column="score_id" property="scoreId" jdbcType="INTEGER" />
+    <result column="mem_id" property="memId" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="DECIMAL" />
+    <result column="exam_time" property="examTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    score_id, mem_id, course_id, score, exam_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.Score" >
+    insert into score (score_id, mem_id, course_id, 
+      score, exam_time)
+    values (#{scoreId,jdbcType=INTEGER}, #{memId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{score,jdbcType=DECIMAL}, #{examTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.Score" >
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        score_id,
+      </if>
+      <if test="memId != null" >
+        mem_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="examTime != null" >
+        exam_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="memId != null" >
+        #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="examTime != null" >
+        #{examTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.Score" >
+    update score
+    <set >
+      <if test="memId != null" >
+        mem_id = #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="examTime != null" >
+        exam_time = #{examTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.Score" >
+    update score
+    set mem_id = #{memId,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      score = #{score,jdbcType=DECIMAL},
+      exam_time = #{examTime,jdbcType=VARCHAR}
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+</mapper>

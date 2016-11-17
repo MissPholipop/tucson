@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.OrderTableMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.OrderTable" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="mem_id" property="memId" jdbcType="INTEGER" />
+    <result column="state_id" property="stateId" jdbcType="INTEGER" />
+    <result column="ins_id" property="insId" jdbcType="INTEGER" />
+    <result column="order_time" property="orderTime" jdbcType="VARCHAR" />
+    <result column="payment" property="payment" jdbcType="INTEGER" />
+    <result column="ordernumber" property="ordernumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, mem_id, state_id, ins_id, order_time, payment, ordernumber
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_table
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_table
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.OrderTable" >
+    insert into order_table (order_id, mem_id, state_id, 
+      ins_id, order_time, payment, 
+      ordernumber)
+    values (#{orderId,jdbcType=INTEGER}, #{memId,jdbcType=INTEGER}, #{stateId,jdbcType=INTEGER}, 
+      #{insId,jdbcType=INTEGER}, #{orderTime,jdbcType=VARCHAR}, #{payment,jdbcType=INTEGER}, 
+      #{ordernumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.OrderTable" >
+    insert into order_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="memId != null" >
+        mem_id,
+      </if>
+      <if test="stateId != null" >
+        state_id,
+      </if>
+      <if test="insId != null" >
+        ins_id,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="payment != null" >
+        payment,
+      </if>
+      <if test="ordernumber != null" >
+        ordernumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="memId != null" >
+        #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="stateId != null" >
+        #{stateId,jdbcType=INTEGER},
+      </if>
+      <if test="insId != null" >
+        #{insId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.OrderTable" >
+    update order_table
+    <set >
+      <if test="memId != null" >
+        mem_id = #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="stateId != null" >
+        state_id = #{stateId,jdbcType=INTEGER},
+      </if>
+      <if test="insId != null" >
+        ins_id = #{insId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null" >
+        payment = #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null" >
+        ordernumber = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.OrderTable" >
+    update order_table
+    set mem_id = #{memId,jdbcType=INTEGER},
+      state_id = #{stateId,jdbcType=INTEGER},
+      ins_id = #{insId,jdbcType=INTEGER},
+      order_time = #{orderTime,jdbcType=VARCHAR},
+      payment = #{payment,jdbcType=INTEGER},
+      ordernumber = #{ordernumber,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.Teacher" >
+    <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="u_type_id" property="uTypeId" jdbcType="INTEGER" />
+    <result column="teacher_age" property="teacherAge" jdbcType="DECIMAL" />
+    <result column="teacher_sex" property="teacherSex" jdbcType="INTEGER" />
+    <result column="teacher_sal" property="teacherSal" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    teacher_id, u_type_id, teacher_age, teacher_sex, teacher_sal
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.Teacher" >
+    insert into teacher (teacher_id, u_type_id, teacher_age, 
+      teacher_sex, teacher_sal)
+    values (#{teacherId,jdbcType=INTEGER}, #{uTypeId,jdbcType=INTEGER}, #{teacherAge,jdbcType=DECIMAL}, 
+      #{teacherSex,jdbcType=INTEGER}, #{teacherSal,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="uTypeId != null" >
+        u_type_id,
+      </if>
+      <if test="teacherAge != null" >
+        teacher_age,
+      </if>
+      <if test="teacherSex != null" >
+        teacher_sex,
+      </if>
+      <if test="teacherSal != null" >
+        teacher_sal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="uTypeId != null" >
+        #{uTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherAge != null" >
+        #{teacherAge,jdbcType=DECIMAL},
+      </if>
+      <if test="teacherSex != null" >
+        #{teacherSex,jdbcType=INTEGER},
+      </if>
+      <if test="teacherSal != null" >
+        #{teacherSal,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.Teacher" >
+    update teacher
+    <set >
+      <if test="uTypeId != null" >
+        u_type_id = #{uTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherAge != null" >
+        teacher_age = #{teacherAge,jdbcType=DECIMAL},
+      </if>
+      <if test="teacherSex != null" >
+        teacher_sex = #{teacherSex,jdbcType=INTEGER},
+      </if>
+      <if test="teacherSal != null" >
+        teacher_sal = #{teacherSal,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.Teacher" >
+    update teacher
+    set u_type_id = #{uTypeId,jdbcType=INTEGER},
+      teacher_age = #{teacherAge,jdbcType=DECIMAL},
+      teacher_sex = #{teacherSex,jdbcType=INTEGER},
+      teacher_sal = #{teacherSal,jdbcType=DECIMAL}
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
+</mapper>

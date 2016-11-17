@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.OrderStateMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.OrderState" >
+    <id column="state_id" property="stateId" jdbcType="INTEGER" />
+    <result column="state_desc" property="stateDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    state_id, state_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_state
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_state
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.OrderState" >
+    insert into order_state (state_id, state_desc)
+    values (#{stateId,jdbcType=INTEGER}, #{stateDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.OrderState" >
+    insert into order_state
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stateId != null" >
+        state_id,
+      </if>
+      <if test="stateDesc != null" >
+        state_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stateId != null" >
+        #{stateId,jdbcType=INTEGER},
+      </if>
+      <if test="stateDesc != null" >
+        #{stateDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.OrderState" >
+    update order_state
+    <set >
+      <if test="stateDesc != null" >
+        state_desc = #{stateDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.OrderState" >
+    update order_state
+    set state_desc = #{stateDesc,jdbcType=VARCHAR}
+    where state_id = #{stateId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!-- 数据库驱动 -->
+<generatorConfiguration >
+	<classPathEntry
+		location="D:\devDemo\Warehouse\JAR\mysql\mysql-connector-java-5.1.6.jar" />
+	<context id="context1">
+		
+		<commentGenerator> 
+		    <!-- 是否去除自动生成的注释 true：是 ： false:否 --> 
+		    <property name="suppressAllComments" value="true" /> 
+	    </commentGenerator> 
+		<!-- 数据库配置 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/graduation" userId="hyan"
+			password="123" />
+		<!-- po配置 -->
+		<javaModelGenerator targetPackage="com.piano.entity"
+			targetProject="piano\src\main\java" />
+		<!-- dao对应xml -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="piano\src\main\resources" />
+		<!-- dao -->
+		 <javaClientGenerator targetPackage="com.piano.dao"
+			targetProject="piano\src\main\java" type="XMLMAPPER" />
+
+		<table schema="graduation" tableName="%"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"	/>
+		
+	</context>
+</generatorConfiguration>

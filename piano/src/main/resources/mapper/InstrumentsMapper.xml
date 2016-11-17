@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.InstrumentsMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.Instruments" >
+    <id column="ins_id" property="insId" jdbcType="INTEGER" />
+    <result column="desc_id" property="descId" jdbcType="INTEGER" />
+    <result column="p_type_id" property="pTypeId" jdbcType="INTEGER" />
+    <result column="ins_name" property="insName" jdbcType="VARCHAR" />
+    <result column="ins_desc" property="insDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.piano.entity.Instruments" extends="BaseResultMap" >
+    <result column="ins_img" property="insImg" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ins_id, desc_id, p_type_id, ins_name, ins_desc
+  </sql>
+  <sql id="Blob_Column_List" >
+    ins_img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from instruments
+    where ins_id = #{insId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from instruments
+    where ins_id = #{insId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.Instruments" >
+    insert into instruments (ins_id, desc_id, p_type_id, 
+      ins_name, ins_desc, ins_img
+      )
+    values (#{insId,jdbcType=INTEGER}, #{descId,jdbcType=INTEGER}, #{pTypeId,jdbcType=INTEGER}, 
+      #{insName,jdbcType=VARCHAR}, #{insDesc,jdbcType=VARCHAR}, #{insImg,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.Instruments" >
+    insert into instruments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="insId != null" >
+        ins_id,
+      </if>
+      <if test="descId != null" >
+        desc_id,
+      </if>
+      <if test="pTypeId != null" >
+        p_type_id,
+      </if>
+      <if test="insName != null" >
+        ins_name,
+      </if>
+      <if test="insDesc != null" >
+        ins_desc,
+      </if>
+      <if test="insImg != null" >
+        ins_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="insId != null" >
+        #{insId,jdbcType=INTEGER},
+      </if>
+      <if test="descId != null" >
+        #{descId,jdbcType=INTEGER},
+      </if>
+      <if test="pTypeId != null" >
+        #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="insName != null" >
+        #{insName,jdbcType=VARCHAR},
+      </if>
+      <if test="insDesc != null" >
+        #{insDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="insImg != null" >
+        #{insImg,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.Instruments" >
+    update instruments
+    <set >
+      <if test="descId != null" >
+        desc_id = #{descId,jdbcType=INTEGER},
+      </if>
+      <if test="pTypeId != null" >
+        p_type_id = #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="insName != null" >
+        ins_name = #{insName,jdbcType=VARCHAR},
+      </if>
+      <if test="insDesc != null" >
+        ins_desc = #{insDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="insImg != null" >
+        ins_img = #{insImg,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where ins_id = #{insId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.piano.entity.Instruments" >
+    update instruments
+    set desc_id = #{descId,jdbcType=INTEGER},
+      p_type_id = #{pTypeId,jdbcType=INTEGER},
+      ins_name = #{insName,jdbcType=VARCHAR},
+      ins_desc = #{insDesc,jdbcType=VARCHAR},
+      ins_img = #{insImg,jdbcType=LONGVARBINARY}
+    where ins_id = #{insId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.Instruments" >
+    update instruments
+    set desc_id = #{descId,jdbcType=INTEGER},
+      p_type_id = #{pTypeId,jdbcType=INTEGER},
+      ins_name = #{insName,jdbcType=VARCHAR},
+      ins_desc = #{insDesc,jdbcType=VARCHAR}
+    where ins_id = #{insId,jdbcType=INTEGER}
+  </update>
+</mapper>

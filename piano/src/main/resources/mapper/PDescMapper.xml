@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.PDescMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.PDesc" >
+    <id column="desc_id" property="descId" jdbcType="INTEGER" />
+    <result column="p_brand" property="pBrand" jdbcType="VARCHAR" />
+    <result column="p_price" property="pPrice" jdbcType="DECIMAL" />
+    <result column="p_date" property="pDate" jdbcType="VARCHAR" />
+    <result column="raw_material" property="rawMaterial" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    desc_id, p_brand, p_price, p_date, raw_material
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from p_desc
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from p_desc
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.PDesc" >
+    insert into p_desc (desc_id, p_brand, p_price, 
+      p_date, raw_material)
+    values (#{descId,jdbcType=INTEGER}, #{pBrand,jdbcType=VARCHAR}, #{pPrice,jdbcType=DECIMAL}, 
+      #{pDate,jdbcType=VARCHAR}, #{rawMaterial,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.PDesc" >
+    insert into p_desc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="descId != null" >
+        desc_id,
+      </if>
+      <if test="pBrand != null" >
+        p_brand,
+      </if>
+      <if test="pPrice != null" >
+        p_price,
+      </if>
+      <if test="pDate != null" >
+        p_date,
+      </if>
+      <if test="rawMaterial != null" >
+        raw_material,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="descId != null" >
+        #{descId,jdbcType=INTEGER},
+      </if>
+      <if test="pBrand != null" >
+        #{pBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="pPrice != null" >
+        #{pPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pDate != null" >
+        #{pDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rawMaterial != null" >
+        #{rawMaterial,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.PDesc" >
+    update p_desc
+    <set >
+      <if test="pBrand != null" >
+        p_brand = #{pBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="pPrice != null" >
+        p_price = #{pPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pDate != null" >
+        p_date = #{pDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rawMaterial != null" >
+        raw_material = #{rawMaterial,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.PDesc" >
+    update p_desc
+    set p_brand = #{pBrand,jdbcType=VARCHAR},
+      p_price = #{pPrice,jdbcType=DECIMAL},
+      p_date = #{pDate,jdbcType=VARCHAR},
+      raw_material = #{rawMaterial,jdbcType=VARCHAR}
+    where desc_id = #{descId,jdbcType=INTEGER}
+  </update>
+</mapper>

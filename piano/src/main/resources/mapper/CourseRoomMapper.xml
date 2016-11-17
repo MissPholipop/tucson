@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.CourseRoomMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.CourseRoom" >
+    <id column="c_room_id" property="cRoomId" jdbcType="INTEGER" />
+    <result column="r_state_id" property="rStateId" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="c_room_time" property="cRoomTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_room_id, r_state_id, course_id, room_id, c_room_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_room
+    where c_room_id = #{cRoomId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_room
+    where c_room_id = #{cRoomId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.CourseRoom" >
+    insert into course_room (c_room_id, r_state_id, course_id, 
+      room_id, c_room_time)
+    values (#{cRoomId,jdbcType=INTEGER}, #{rStateId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{roomId,jdbcType=INTEGER}, #{cRoomTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.CourseRoom" >
+    insert into course_room
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cRoomId != null" >
+        c_room_id,
+      </if>
+      <if test="rStateId != null" >
+        r_state_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="cRoomTime != null" >
+        c_room_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cRoomId != null" >
+        #{cRoomId,jdbcType=INTEGER},
+      </if>
+      <if test="rStateId != null" >
+        #{rStateId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="cRoomTime != null" >
+        #{cRoomTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.CourseRoom" >
+    update course_room
+    <set >
+      <if test="rStateId != null" >
+        r_state_id = #{rStateId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="cRoomTime != null" >
+        c_room_time = #{cRoomTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_room_id = #{cRoomId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.CourseRoom" >
+    update course_room
+    set r_state_id = #{rStateId,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
+      c_room_time = #{cRoomTime,jdbcType=VARCHAR}
+    where c_room_id = #{cRoomId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.StuClsMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.StuCls" >
+    <id column="learn_id" property="learnId" jdbcType="INTEGER" />
+    <result column="mem_id" property="memId" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="learn_time" property="learnTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    learn_id, mem_id, course_id, learn_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stu_cls
+    where learn_id = #{learnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stu_cls
+    where learn_id = #{learnId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.StuCls" >
+    insert into stu_cls (learn_id, mem_id, course_id, 
+      learn_time)
+    values (#{learnId,jdbcType=INTEGER}, #{memId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{learnTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.StuCls" >
+    insert into stu_cls
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="learnId != null" >
+        learn_id,
+      </if>
+      <if test="memId != null" >
+        mem_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="learnTime != null" >
+        learn_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="learnId != null" >
+        #{learnId,jdbcType=INTEGER},
+      </if>
+      <if test="memId != null" >
+        #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="learnTime != null" >
+        #{learnTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.StuCls" >
+    update stu_cls
+    <set >
+      <if test="memId != null" >
+        mem_id = #{memId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="learnTime != null" >
+        learn_time = #{learnTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where learn_id = #{learnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.StuCls" >
+    update stu_cls
+    set mem_id = #{memId,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      learn_time = #{learnTime,jdbcType=VARCHAR}
+    where learn_id = #{learnId,jdbcType=INTEGER}
+  </update>
+</mapper>

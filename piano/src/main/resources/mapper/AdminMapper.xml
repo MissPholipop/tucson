@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.Admin" >
+    <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="u_type_id" property="uTypeId" jdbcType="INTEGER" />
+    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+    <result column="admin_pswd" property="adminPswd" jdbcType="VARCHAR" />
+    <result column="admin_count" property="adminCount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    admin_id, u_type_id, admin_name, admin_pswd, admin_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.Admin" >
+    insert into admin (admin_id, u_type_id, admin_name, 
+      admin_pswd, admin_count)
+    values (#{adminId,jdbcType=INTEGER}, #{uTypeId,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, 
+      #{adminPswd,jdbcType=VARCHAR}, #{adminCount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="uTypeId != null" >
+        u_type_id,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="adminPswd != null" >
+        admin_pswd,
+      </if>
+      <if test="adminCount != null" >
+        admin_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="uTypeId != null" >
+        #{uTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPswd != null" >
+        #{adminPswd,jdbcType=VARCHAR},
+      </if>
+      <if test="adminCount != null" >
+        #{adminCount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.Admin" >
+    update admin
+    <set >
+      <if test="uTypeId != null" >
+        u_type_id = #{uTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPswd != null" >
+        admin_pswd = #{adminPswd,jdbcType=VARCHAR},
+      </if>
+      <if test="adminCount != null" >
+        admin_count = #{adminCount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.Admin" >
+    update admin
+    set u_type_id = #{uTypeId,jdbcType=INTEGER},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      admin_pswd = #{adminPswd,jdbcType=VARCHAR},
+      admin_count = #{adminCount,jdbcType=VARCHAR}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+</mapper>

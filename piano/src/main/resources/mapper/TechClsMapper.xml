@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.TechClsMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.TechCls" >
+    <id column="teach_cls_id" property="teachClsId" jdbcType="INTEGER" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="teach_cls_time" property="teachClsTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    teach_cls_id, teacher_id, course_id, teach_cls_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tech_cls
+    where teach_cls_id = #{teachClsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tech_cls
+    where teach_cls_id = #{teachClsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.TechCls" >
+    insert into tech_cls (teach_cls_id, teacher_id, course_id, 
+      teach_cls_time)
+    values (#{teachClsId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{teachClsTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.TechCls" >
+    insert into tech_cls
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teachClsId != null" >
+        teach_cls_id,
+      </if>
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="teachClsTime != null" >
+        teach_cls_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teachClsId != null" >
+        #{teachClsId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="teachClsTime != null" >
+        #{teachClsTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.TechCls" >
+    update tech_cls
+    <set >
+      <if test="teacherId != null" >
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="teachClsTime != null" >
+        teach_cls_time = #{teachClsTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teach_cls_id = #{teachClsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.TechCls" >
+    update tech_cls
+    set teacher_id = #{teacherId,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      teach_cls_time = #{teachClsTime,jdbcType=VARCHAR}
+    where teach_cls_id = #{teachClsId,jdbcType=INTEGER}
+  </update>
+</mapper>

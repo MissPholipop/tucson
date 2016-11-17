@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.PayroolMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.Payrool" >
+    <id column="sally_id" property="sallyId" jdbcType="INTEGER" />
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <result column="sal_id" property="salId" jdbcType="INTEGER" />
+    <result column="sally_time" property="sallyTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sally_id, teacher_id, sal_id, sally_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from payrool
+    where sally_id = #{sallyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from payrool
+    where sally_id = #{sallyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.Payrool" >
+    insert into payrool (sally_id, teacher_id, sal_id, 
+      sally_time)
+    values (#{sallyId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, #{salId,jdbcType=INTEGER}, 
+      #{sallyTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.Payrool" >
+    insert into payrool
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sallyId != null" >
+        sally_id,
+      </if>
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="salId != null" >
+        sal_id,
+      </if>
+      <if test="sallyTime != null" >
+        sally_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sallyId != null" >
+        #{sallyId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="salId != null" >
+        #{salId,jdbcType=INTEGER},
+      </if>
+      <if test="sallyTime != null" >
+        #{sallyTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.Payrool" >
+    update payrool
+    <set >
+      <if test="teacherId != null" >
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="salId != null" >
+        sal_id = #{salId,jdbcType=INTEGER},
+      </if>
+      <if test="sallyTime != null" >
+        sally_time = #{sallyTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sally_id = #{sallyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.Payrool" >
+    update payrool
+    set teacher_id = #{teacherId,jdbcType=INTEGER},
+      sal_id = #{salId,jdbcType=INTEGER},
+      sally_time = #{sallyTime,jdbcType=VARCHAR}
+    where sally_id = #{sallyId,jdbcType=INTEGER}
+  </update>
+</mapper>

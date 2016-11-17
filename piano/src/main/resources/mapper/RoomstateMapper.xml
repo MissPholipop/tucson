@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.RoomstateMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.Roomstate" >
+    <id column="r_state_id" property="rStateId" jdbcType="INTEGER" />
+    <result column="r_state_desc" property="rStateDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    r_state_id, r_state_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from roomstate
+    where r_state_id = #{rStateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from roomstate
+    where r_state_id = #{rStateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.Roomstate" >
+    insert into roomstate (r_state_id, r_state_desc)
+    values (#{rStateId,jdbcType=INTEGER}, #{rStateDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.Roomstate" >
+    insert into roomstate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rStateId != null" >
+        r_state_id,
+      </if>
+      <if test="rStateDesc != null" >
+        r_state_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rStateId != null" >
+        #{rStateId,jdbcType=INTEGER},
+      </if>
+      <if test="rStateDesc != null" >
+        #{rStateDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.Roomstate" >
+    update roomstate
+    <set >
+      <if test="rStateDesc != null" >
+        r_state_desc = #{rStateDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where r_state_id = #{rStateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.Roomstate" >
+    update roomstate
+    set r_state_desc = #{rStateDesc,jdbcType=VARCHAR}
+    where r_state_id = #{rStateId,jdbcType=INTEGER}
+  </update>
+</mapper>

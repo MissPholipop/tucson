@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piano.dao.PTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.piano.entity.PType" >
+    <id column="p_type_id" property="pTypeId" jdbcType="INTEGER" />
+    <result column="p_type_desc" property="pTypeDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    p_type_id, p_type_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from p_type
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from p_type
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.piano.entity.PType" >
+    insert into p_type (p_type_id, p_type_desc)
+    values (#{pTypeId,jdbcType=INTEGER}, #{pTypeDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piano.entity.PType" >
+    insert into p_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pTypeId != null" >
+        p_type_id,
+      </if>
+      <if test="pTypeDesc != null" >
+        p_type_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pTypeId != null" >
+        #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="pTypeDesc != null" >
+        #{pTypeDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.PType" >
+    update p_type
+    <set >
+      <if test="pTypeDesc != null" >
+        p_type_desc = #{pTypeDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piano.entity.PType" >
+    update p_type
+    set p_type_desc = #{pTypeDesc,jdbcType=VARCHAR}
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>
