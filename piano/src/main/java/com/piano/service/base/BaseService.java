@@ -7,14 +7,22 @@ import javax.annotation.Resource;
 
 
 
-import org.apache.ibatis.session.RowBounds;
-import org.apache.log4j.Logger;
+
+
+
+
+import org.apache.ibatis.session.RowBounds;/*
+import org.apache.log4j.Logger;*/
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.Page;
+import com.piano.dao.base.IBaseDao;
+import com.piano.entity.base.BaseArgument;
 
 
 
@@ -22,7 +30,7 @@ import com.github.pagehelper.Page;
 @Transactional(readOnly = false)
 @Service("baseService")
 public class BaseService implements IBaseService {
-    private static final Logger log = Logger.getLogger(BaseService.class);
+    private static final Logger log = LoggerFactory.getLogger(BaseService.class);
     
     @Resource(name="baseDao")
     protected IBaseDao dao;
