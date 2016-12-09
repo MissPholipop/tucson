@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
-encoding//src/main/webapp/WEB-INF/jsp/NewFile.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/jsp/test.jsp=UTF-8
 encoding//src/main/webapp/index.jsp=UTF-8
+encoding//src/main/webapp/jsp/admin/js/locale/easyui-lang-zh_CN.js=UTF-8
+encoding//src/main/webapp/jsp/admin/js/locale/easyui-lang-zh_TW.js=UTF-8
 encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

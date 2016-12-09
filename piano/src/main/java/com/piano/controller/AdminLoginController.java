@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.piano.exception.PianoException;
 
-@Controller
+/*@Controller
 @RequestMapping("/admin")
 public class AdminLoginController {
 	Logger log = LoggerFactory.getLogger(TestController.class);
@@ -25,3 +25,4 @@ public class AdminLoginController {
 		return "index";
 	}
 }
+*/

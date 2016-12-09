@@ -46,7 +46,7 @@ public class BaseService implements IBaseService {
         if(!name.endsWith("Mapper")){
             name = name + "Mapper";
         }
-        return "dao."+name + "." + method;
+        return "com.piano.dao."+name + "." + method;
     }
 
     /**

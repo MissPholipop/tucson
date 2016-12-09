@@ -21,13 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="wrapper">
 
 	<div class="container">
-		<h1>Welcome</h1>
-		<form class="form">
-			<input type="text" placeholder="用户名" id ="adminNick" name= "admin" onblur="confirmUser()">
+		<h1>用户注册</h1>
+		<!-- <form class="form" action ="front/confirm" method = "post">
+			<input type="text" placeholder="用户名" id ="adminNick" name= "adminName" onblur="confirmUser()">
 			<span id="adminError"  style="color:red; display:none" >输入错误</span>
-			<input type="password" placeholder="密码" name= "pswd" id="pswd">
+			<input type="password" placeholder="密码" name= "adminPswd" id="pswd">
 			<button type="submit" id="login-button">登录</button>
-		</form>
+		</form> -->
 	</div>
 	
 	<ul class="bg-bubbles">
@@ -47,28 +47,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript" src="<%=basePath%>js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
-$('#login-button').click(function(event){
-	event.preventDefault();
-	$('form').fadeOut(500);
-	$('.wrapper').addClass('form-success');
-});
+
 function confirmUser(){
 	//alert("haha");
-	console.log($("#adminNick").val());
+	//console.log($("#adminNick").val());
 	
 	
 	$.ajax({
 
              type: "GET",
 
-             url: "confirmAdmin",
+             url: "front/user_name_confirm",
 
-             data: {admin:$("#adminNick").val(), pswd:$("#content").val()},
+             data:{username: $("#adminNick").val()},
 
              dataType: "json",
 
              success: function(data){
-             	$("#adminError").css("display","block");
+            	/*  if(data==true){
+            		 alert("测试成功");
+            	 } */
+            	// alert(data);
+             	//$("#adminError").css("display","block");
              
              }});
 	

@@ -44,6 +44,10 @@
 		<!-- 注入sqlSessionFactory -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<!-- 给出需要扫描Dao接口包 -->
-		<property name="basePackage" value="com.piano.dao"/> 
+		<property name="basePackage" value="com.piano.dao.*"/> 
+		<!-- <property name="basePackage" value="com.piano.dao.base"/>  -->
+		
 	</bean>
+	<bean id = "baseDao" class="com.piano.dao.base.BaseDao"></bean>
+	
 </beans>

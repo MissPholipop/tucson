@@ -14,7 +14,9 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 /**
  * 公共的Dao实现类提供基本的增删该查操作，减少大量重复的代码
  */
-@Repository("baseDao")
+
+@Resource(name="baseDao")
+/*@Repository("baseDao")*/
 public class BaseDao extends SqlSessionDaoSupport implements IBaseDao {
     
     @Resource

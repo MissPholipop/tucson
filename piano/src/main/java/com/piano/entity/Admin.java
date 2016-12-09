@@ -1,6 +1,9 @@
 package com.piano.entity;
 
-public class Admin {
+import com.piano.entity.base.BaseModel;
+
+
+public class Admin extends BaseModel implements java.io.Serializable{
     private Integer adminId;
 
     private Integer uTypeId;

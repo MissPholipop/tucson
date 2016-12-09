@@ -11,16 +11,40 @@
   <sql id="Base_Column_List" >
     admin_id, u_type_id, admin_name, admin_pswd, admin_count
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  
+   <select id="select" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where 1 = 1
+    <if test="adminId !=null ">
+    	and admin_id = #{adminId}
+    </if>  
+    <if test="adminName !=null">
+    	and admin_name = #{adminName}
+    </if>
+    <if test="adminPswd != null">
+    	and admin_pswd = #{adminPswd}
+    </if>
+    <if test="adminCount != null">
+    	and admin_count = #{adminCount} 
+    </if>
+  </select>
+ 
+  
+  <select id="selectByPrimaryColumn" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from admin
     where admin_id = #{adminId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  
+  
+  <delete id="deleteByPrimaryColumn" parameterType="java.lang.Integer" >
     delete from admin
     where admin_id = #{adminId,jdbcType=INTEGER}
   </delete>
+  
   <insert id="insert" parameterType="com.piano.entity.Admin" >
     insert into admin (admin_id, u_type_id, admin_name, 
       admin_pswd, admin_count)
@@ -64,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.piano.entity.Admin" >
+  <update id="updateByPrimaryColumnSelective" parameterType="com.piano.entity.Admin" >
     update admin
     <set >
       <if test="uTypeId != null" >
@@ -82,7 +106,7 @@
     </set>
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.piano.entity.Admin" >
+  <update id="updateByPrimaryColumn" parameterType="com.piano.entity.Admin" >
     update admin
     set u_type_id = #{uTypeId,jdbcType=INTEGER},
       admin_name = #{adminName,jdbcType=VARCHAR},
@@ -90,4 +114,61 @@
       admin_count = #{adminCount,jdbcType=VARCHAR}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+  
+   <insert id="insertBatch" parameterType="java.util.List">  
+        insert into admin (
+                       u_type_id, 
+                       admin_name, 
+     				   admin_pswd, 
+     				   admin_count
+        )
+        values 
+        <foreach collection="list" index="index" item="item" separator=",">  
+        (
+		      
+		       #{item.uTypeId,jdbcType=INTEGER}, 
+		       #{item.adminName,jdbcType=VARCHAR}, 
+		       #{item.adminPswd,jdbcType=VARCHAR}, 
+		       #{item.adminCount,jdbcType=VARCHAR}
+
+        )
+        </foreach>
+    </insert>
+  
+     <update id="updateBatch" parameterType="java.util.List"> 
+        update admin
+	    	set 
+	    	u_type_id = #{uTypeId,jdbcType=INTEGER},
+	        admin_name = #{adminName,jdbcType=VARCHAR},
+	      	admin_pswd = #{adminPswd,jdbcType=VARCHAR},
+	      	admin_count = #{adminCount,jdbcType=VARCHAR}
+	        where admin_id = #{admin_id}
+        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">     
+            #{item}
+        </foreach>
+    </update> 
+ 
+    <delete id="deleteBatch" parameterType="java.util.List"> 
+        DELETE FROM ADMIN WHERE admin_id IN 
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">  
+            #{item}  
+        </foreach> 
+    </delete>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>
