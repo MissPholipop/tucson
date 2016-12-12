@@ -17,27 +17,6 @@ var proposals = ['html5tricks', 'jquery', 'css3', 'chief', 'dog', 'drink', 'elep
 	
 }
  */
- function search(){
-	 
-	alert($("#search").val());
- 	 $.ajax({
-
-	             type: "GET",
-
-	             url: "search",
-
-	             data:{keyWord:$("#search").val()},
-
-	             dataType: "json",
-
-	             success: function(data){
-	            	  
-	            	alert(data);
-	            	// $('#message').html('Selected: <b>' + data + '</b>');	
-	             }
-	             
-	              });  
- }
 
 $(document).ready(function(){
 	$('#search-form').autocomplete({
@@ -77,8 +56,7 @@ $(document).ready(function(){
 <div id="demo">
 	<div class="wrapper">
 		<h3>试试输入"html5"</h3>
-		<!-- <div id="search-form" ></div> -->
-		<input onkeyup="search()" id = "search">
+		<div id="search-form" ></div>
 		<div id="message"></div>
 	</div>
 </div>
