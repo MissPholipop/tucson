@@ -1,4 +1,4 @@
-package com.piano.common;
+/*package com.piano.common;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ public class ComServiceImpl<T> implements ComService {
 	
 	
 	
-	/*public ComServiceImpl(Class<?> clazz){
+	public ComServiceImpl(Class<?> clazz){
 		Class.forName(className)
-	}*/
+	}
 	
 	
 	
@@ -57,3 +57,4 @@ public class ComServiceImpl<T> implements ComService {
 	}
 
 }
+*/

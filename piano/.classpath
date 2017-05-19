@@ -36,5 +36,8 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/pagehelper-4.0.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/fastjson-1.1.31.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/c3p0-0.9.1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/quartz-2.2.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/quartz-jobs-2.2.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

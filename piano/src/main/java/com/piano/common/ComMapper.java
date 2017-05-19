@@ -1,4 +1,4 @@
-package com.piano.common;
+/*package com.piano.common;
 
 import com.piano.entity.Admin;
 
@@ -17,3 +17,4 @@ public interface ComMapper {
 
 	    int updateByPrimaryKey(Admin record);
 }
+*/
